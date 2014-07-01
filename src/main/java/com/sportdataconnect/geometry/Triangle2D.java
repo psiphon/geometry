@@ -1,5 +1,6 @@
 package com.sportdataconnect.geometry;
 
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +18,7 @@ public final class Triangle2D implements Polygon2D {
     private Point2D pt2;
     private Point2D pt3;
     
-    private List<Triangle2D> thisAsList = null;
+    private ImmutableList<Triangle2D> thisAsList = null;
 
     public Triangle2D(final Point2D pt1, final Point2D pt2, final Point2D pt3) {
         this.pt1 = pt1;
@@ -52,8 +53,7 @@ public final class Triangle2D implements Polygon2D {
 
     public List<Triangle2D> toTriangles() {
         if (thisAsList == null) {
-            thisAsList = new ArrayList<Triangle2D>(1);
-            thisAsList.add(this);
+            thisAsList = ImmutableList.of(this);
         }
         return thisAsList;
     }

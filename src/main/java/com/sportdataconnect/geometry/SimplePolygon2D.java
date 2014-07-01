@@ -1,5 +1,6 @@
 package com.sportdataconnect.geometry;
 
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,13 +11,13 @@ import java.util.List;
  */
 public final class SimplePolygon2D implements Polygon2D {
     
-    private List<Point2D> points;
+    private ImmutableList<Point2D> points;
 
     public SimplePolygon2D(final List<Point2D> points) {
         if (points.size() < 3) {
             throw new IllegalArgumentException("Cannot create polygon with less than 3 vertices");
         }
-        this.points = new ArrayList<Point2D>(points);
+        this.points = ImmutableList.copyOf(points);
     }
 
     public Point2D get(final int ix) {

@@ -1,5 +1,6 @@
 package com.sportdataconnect.geometry;
 
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,16 +14,16 @@ import java.util.List;
  */
 public final class Star2D implements Polygon2D {
     
-    private List<Point2D> points;
+    private ImmutableList<Point2D> points;
     private Point2D kernel;
     
     public Star2D(final List<Point2D> points) {
-        this.points = new ArrayList<Point2D>(points);
+        this.points = ImmutableList.copyOf(points);
         kernel = new Point2D(0.0, 0.0);
     }
 
     public Star2D(final List<Point2D> points, final Point2D kernel) {
-        this.points = new ArrayList<Point2D>(points);
+        this.points = ImmutableList.copyOf(points);
         this.kernel = kernel;
     }
 
