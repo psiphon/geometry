@@ -1,5 +1,6 @@
 package com.sportdataconnect.geometry;
 
+import com.google.common.base.Optional;
 import com.sportdataconnect.geometry.matrix.Matrix3x3;
 
 /**
@@ -43,7 +44,7 @@ public final class Triangle3D {
         return pt3;
     }
     
-    public Point3D planeEdgeIntersection(final Edge3D edge) {
+    public Optional<Point3D> planeEdgeIntersection(final Edge3D edge) {
         double[] m = new double[9];
         m[0] = edge.getStartPoint().getX() - edge.getEndPoint().getX();
         m[1] = pt2.getX() - pt1.getX();
@@ -63,9 +64,9 @@ public final class Triangle3D {
             Point3D offset = edge.getStartPoint().subtract(this.pt1);
             Point3D intersectionVector = inverseMatrix.premult33(offset);
             Point3D intersection = edge.getStartPoint().add(edge.getVector().scale(intersectionVector.getX()));
-            return intersection;
+            return Optional.of(intersection);
         } else {
-            return null;
+            return Optional.absent();
         }
     }
 }
