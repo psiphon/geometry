@@ -72,6 +72,12 @@ public final class Point2D {
             return Math.atan2(y, x);
         }
     }
+
+    public double distanceFrom(final Point2D point) {
+        double dx = point.x - this.x;
+        double dy = point.y - this.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
     
     public static List<Point2D> createConvexPolygon(final Collection<Point2D> points) {
         LOG.debug(">>");
