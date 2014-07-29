@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * Representation of a point in 2D space.
  *
  * @author sportdataconnect
  */
@@ -17,9 +18,9 @@ public final class Point2D {
     
     private static final Logger LOG = LogManager.getLogger(Point2D.class);
     
-    private double x;
-    private double y;
-    private double length;
+    private final double x;
+    private final double y;
+    private final double length;
 
     public Point2D(final double x, final double y) {
         this.x = x;
@@ -36,18 +37,37 @@ public final class Point2D {
         return y;
     }
     
+    /**
+     * Returns the distance of the point from the origin. The vector length.
+     * @return Returns the distance of the point from the origin
+     */
     public double getLength() {
         return length;
     }
     
+    /**
+     * Returns the sum of this point and the supplied rhs parameter. The vector sum.
+     * @param rhs
+     * @return Returns the sum of this point and the supplied rhs parameter.
+     */
     public Point2D add(final Point2D rhs) {
         return new Point2D(this.x + rhs.x, this.y + rhs.y);
     }
     
+    /**
+     * Returns this point after being scaled by the supplied value. Scalar multiplication.
+     * @param scaleFactor
+     * @return Returns this point after being scaled by the supplied value
+     */
     public Point2D scale(final double scaleFactor) {
         return new Point2D(this.x * scaleFactor, this.y * scaleFactor);
     }
     
+    /**
+     * Returns this point after being scaled such that it's length is one. The
+     * unit vector with the same direction)
+     * @return Returns this point after being scaled such that it's length is one.
+     */
     public Point2D normalize() {
         return this.scale(1.0 / length);
     }
@@ -57,10 +77,21 @@ public final class Point2D {
         return "Point3D{" + "x=" + x + ", y=" + y + "}";
     }
 
-    public Point2D subtract(final Point2D pcCentre) {
-        return new Point2D(this.x - pcCentre.x, this.y - pcCentre.y);
+    /**
+     * Returns the result of subtracting the supplied point from this one. Vector
+     * subtraction
+     * @param pcCentre
+     * @return Returns the result of subtracting the supplied point from this one
+     */
+    public Point2D subtract(final Point2D rhs) {
+        return new Point2D(this.x - rhs.x, this.y - rhs.y);
     }
     
+    /**
+     * Returns the cross product of this vector and the supplied vector
+     * @param rhs
+     * @return Returns the cross product of this vector and the supplied vecto
+     */
     public double crossProduct(final Point2D rhs) {
         return this.x * rhs.y - this.y * rhs.x;
     }
@@ -71,6 +102,10 @@ public final class Point2D {
         return new Point2D(crossDir3D.getX(), crossDir3D.getY());
     }
     
+    /**
+     * Returns the angle anti-clockwise angle between this vector and the X-axis
+     * @return Returns the angle anti-clockwise angle between this vector and the X-axis
+     */
     public double polarAngle() {
         if (y < 0) {
             return 2 * Math.PI + Math.atan2(y, x);
@@ -85,6 +120,12 @@ public final class Point2D {
         return Math.sqrt(dx * dx + dy * dy);
     }
     
+    /**
+     * Returns the smallest possible convex polygon that contains all of the supplied points.
+     * The points are returned anti-clockwise.
+     * @param points
+     * @return Returns the smallest possible convex polygon that contains all of the supplied points
+     */
     public static List<Point2D> createConvexPolygon(final Collection<Point2D> points) {
         LOG.debug(">>");
         Set<Point2D> remainingPoints = new HashSet<Point2D>(points);
