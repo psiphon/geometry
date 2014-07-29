@@ -64,6 +64,12 @@ public final class Point2D {
     public double crossProduct(final Point2D rhs) {
         return this.x * rhs.y - this.y * rhs.x;
     }
+
+    public Point2D crossDir() {
+        Point3D pt3D = new Point3D(x, y, 0.0);
+        Point3D crossDir3D = pt3D.crossProduct(Point3D.Z_AXIS_DIR).normalize();
+        return new Point2D(crossDir3D.getX(), crossDir3D.getY());
+    }
     
     public double polarAngle() {
         if (y < 0) {
