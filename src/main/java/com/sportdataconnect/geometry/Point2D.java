@@ -90,12 +90,16 @@ public final class Point2D {
     /**
      * Returns the cross product of this vector and the supplied vector
      * @param rhs
-     * @return Returns the cross product of this vector and the supplied vecto
+     * @return Returns the cross product of this vector and the supplied vector
      */
     public double crossProduct(final Point2D rhs) {
         return this.x * rhs.y - this.y * rhs.x;
     }
 
+    /**
+     * Returns the direction that is perpendicular to this point
+     * @return Returns the direction that is perpendicular to this point
+     */
     public Point2D crossDir() {
         Point3D pt3D = new Point3D(x, y, 0.0);
         Point3D crossDir3D = pt3D.crossProduct(Point3D.Z_AXIS_DIR).normalize();
@@ -114,12 +118,22 @@ public final class Point2D {
         }
     }
 
+    /**
+     * Returns the distance of this point from the specified point
+     * @param point
+     * @return Returns the distance of this point from the specified point
+     */
     public double distanceFrom(final Point2D point) {
         double dx = point.x - this.x;
         double dy = point.y - this.y;
         return Math.sqrt(dx * dx + dy * dy);
     }
 
+    /**
+     * Returns the average location of the points in the collection
+     * @param pts
+     * @return Returns the average location of the points in the collection
+     */
     public static Point2D findAverage(final Collection<Point2D> pts) {
         double sumX = 0;
         double sumY = 0;
