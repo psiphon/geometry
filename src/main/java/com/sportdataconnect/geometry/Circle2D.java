@@ -1,5 +1,10 @@
 package com.sportdataconnect.geometry;
 
+/**
+ * Representation of a circle in 2D space. The circle is defined by a centre point and a radius
+ *
+ * @author sportdataconnect
+ */
 public final class Circle2D {
 
     private final Point2D centre;
@@ -10,14 +15,29 @@ public final class Circle2D {
         this.radius = radius;
     }
 
+    /**
+     * Returns the centre of the circle
+     * @return Returns the centre of the circle
+     */
     public Point2D getCentre() {
         return centre;
     }
 
+    /**
+     * Returns the radius of the circle
+     * @return Returns the radius of the circle
+     */
     public double getRadius() {
         return radius;
     }
 
+    /**
+     * Returns the nearest point that the specified line intersects the circle. If the line does not intersect the circle
+     * then null is returned. The 'nearest' point is the point nearest to the line's point (i.e. two geometrically equivalent lines
+     * may return different results depending on what point they are defined with).
+     * @param line
+     * @return Returns the nearest point that the specified line intersects the circle
+     */
     public Point2D getNearestLineIntersection(final Line2D line) {
         /* Line circle intersection calculation assumes that the circle is centred at the origin so translate the line
            first */
