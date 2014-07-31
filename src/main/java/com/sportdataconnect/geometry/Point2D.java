@@ -80,7 +80,7 @@ public final class Point2D {
     /**
      * Returns the result of subtracting the supplied point from this one. Vector
      * subtraction
-     * @param pcCentre
+     * @param rhs
      * @return Returns the result of subtracting the supplied point from this one
      */
     public Point2D subtract(final Point2D rhs) {
@@ -118,6 +118,16 @@ public final class Point2D {
         double dx = point.x - this.x;
         double dy = point.y - this.y;
         return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    public static Point2D findAverage(final Collection<Point2D> pts) {
+        double sumX = 0;
+        double sumY = 0;
+        for (Point2D pt : pts) {
+            sumX += pt.x;
+            sumY += pt.y;
+        }
+        return new Point2D(sumX / pts.size(), sumY / pts.size());
     }
     
     /**
