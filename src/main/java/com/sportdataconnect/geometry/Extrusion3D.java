@@ -6,9 +6,10 @@ import java.util.List;
 
 /**
  * Representation of a 2D shape extruded into 3D space along a central edge. The extrusion consists of a 2D polygon
- * describing the cross section and 3D start and end points. From this description the start and end face can be described
- * as points, edges or triangles. The supplied cross section polygon need not be projected in a plane perpendicular to the
- * central edge - the face dir parameters allows the cross section to be projected onto an arbitrary plane.
+ * describing the cross section and 3D start and end points. From this description the start and end face can be
+ * described as points, edges or triangles. The supplied cross section polygon need not be projected in a plane
+ * perpendicular to the central edge - the face dir parameters allows the cross section to be projected onto an
+ * arbitrary plane.
  *
  * @author sportdataconnect
  */

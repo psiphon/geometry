@@ -32,9 +32,9 @@ public final class Circle2D {
     }
 
     /**
-     * Returns the nearest point that the specified line intersects the circle. If the line does not intersect the circle
-     * then null is returned. The 'nearest' point is the point nearest to the line's point (i.e. two geometrically equivalent lines
-     * may return different results depending on what point they are defined with).
+     * Returns the nearest point that the specified line intersects the circle. If the line does not intersect the
+     * circle then null is returned. The 'nearest' point is the point nearest to the line's point (i.e. two
+     * geometrically equivalent lines may return different results depending on what point they are defined with).
      * @param line
      * @return Returns the nearest point that the specified line intersects the circle
      */
