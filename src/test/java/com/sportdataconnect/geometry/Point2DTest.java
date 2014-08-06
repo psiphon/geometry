@@ -58,5 +58,10 @@ public class Point2DTest {
         Point2D pt = new Point2D(0.0, -1.0);
         assertEquals(Math.PI * 1.5, pt.polarAngle(), 0.00001);
     }
+
+    @Test
+    public void testCreateConvexPolygon() {
+
+    }
     
 }

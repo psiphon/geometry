@@ -7,7 +7,11 @@ public final class Line2D {
 
     public Line2D(final Point2D point, final Point2D direction) {
         this.point = point;
-        this.direction = direction;
+        if (direction.getLength() != 1.0) {
+            this.direction = direction.normalize();
+        } else {
+            this.direction = direction;
+        }
     }
 
     public static Line2D fromEdge(final Point2D start, final Point2D end) {

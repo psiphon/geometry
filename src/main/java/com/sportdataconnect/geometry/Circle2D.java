@@ -1,5 +1,8 @@
 package com.sportdataconnect.geometry;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Representation of a circle in 2D space. The circle is defined by a centre point and a radius
  *
@@ -43,34 +46,61 @@ public final class Circle2D {
            first */
         Line2D normalisedLine = line.translate(centre.scale(-1));
         Point2D endPoint = normalisedLine.getPoint().add(normalisedLine.getDirection());
-        double bigD = normalisedLine.getPoint().getX() * endPoint.getY()
-                      - endPoint.getX() * normalisedLine.getPoint().getY();
-        final double dr = normalisedLine.getDirection().getLength();
-        final double dy = normalisedLine.getDirection().getY();
-        final double dx = normalisedLine.getDirection().getX();
-        double discriminant = radius * radius * dr * dr - bigD * bigD;
+        double bigD = normalisedLine.getPoint().crossProduct(endPoint);
+        double discriminant = radius * radius - bigD * bigD;
         if (discriminant > 0) {
-            /* line intersects in two places */
-            double x1 = (bigD * dy + sgn(dy) * dx * Math.sqrt(radius * radius * dr * dr - bigD * bigD)) / (dr * dr);
-            double x2 = (bigD * dy - sgn(dy) * dx * Math.sqrt(radius * radius * dr * dr - bigD * bigD)) / (dr * dr);
-            double y1 = (-bigD * dx + Math.abs(dy) * Math.sqrt(radius * radius * dr * dr - bigD * bigD)) / (dr * dr);
-            double y2 = (-bigD * dx - Math.abs(dy) * Math.sqrt(radius * radius * dr * dr - bigD * bigD)) / (dr * dr);
-            Point2D p1 = new Point2D(x1, y1);
-            Point2D p2 = new Point2D(x2, y2);
-            if (p1.distanceFrom(normalisedLine.getPoint()) > p2.distanceFrom(normalisedLine.getPoint())) {
-                return p2.add(centre);
-            } else {
-                return p1.add(centre);
-            }
+            Point2D[] points = getBothLineIntersectionPoints(normalisedLine, bigD);
+            return normalisedLine.getPoint().findNearest(points).add(centre);
         } else if (discriminant == 0) {
-            /* line intersects at a single point (i.e. is a tangent) */
-            double x = (bigD * dy) / (dr * dr);
-            double y = (-bigD * dx) / (dr * dr);
-            return new Point2D(x, y).add(centre);
+            return getSingleLineIntersectionPoint(normalisedLine, bigD);
         } else {
             /* line does not intersect the circle */
             return null;
         }
+    }
+
+    public Set<Point2D> getLineIntersectionPoints(final Line2D line) {
+        /* Line circle intersection calculation assumes that the circle is centred at the origin so translate the line
+           first */
+        Line2D normalisedLine = line.translate(centre.scale(-1));
+        Point2D endPoint = normalisedLine.getPoint().add(normalisedLine.getDirection());
+        double bigD = normalisedLine.getPoint().crossProduct(endPoint);
+        double discriminant = radius * radius - bigD * bigD;
+        if (discriminant > 0) {
+            Point2D[] points = getBothLineIntersectionPoints(normalisedLine, bigD);
+            Set<Point2D> result = new HashSet<Point2D>();
+            result.add(points[0].add(centre));
+            result.add(points[1].add(centre));
+            return result;
+        } else if (discriminant == 0) {
+            Set result = new HashSet();
+            result.add(getSingleLineIntersectionPoint(normalisedLine, bigD));
+            return result;
+        } else {
+            /* line does not intersect the circle */
+            return new HashSet<Point2D>();
+        }
+    }
+
+    private Point2D getSingleLineIntersectionPoint(final Line2D normalisedLine, final double bigD) {
+        final double dy = normalisedLine.getDirection().getY();
+        final double dx = normalisedLine.getDirection().getX();
+        double x = (bigD * dy);
+        double y = (-bigD * dx);
+        return new Point2D(x, y).add(centre);
+    }
+
+    private Point2D[] getBothLineIntersectionPoints(final Line2D normalisedLine, final double bigD) {
+        final double dy = normalisedLine.getDirection().getY();
+        final double dx = normalisedLine.getDirection().getX();
+        double x1 = (bigD * dy + sgn(dy) * dx * Math.sqrt(radius * radius - bigD * bigD));
+        double x2 = (bigD * dy - sgn(dy) * dx * Math.sqrt(radius * radius - bigD * bigD));
+        double y1 = (-bigD * dx + Math.abs(dy) * Math.sqrt(radius * radius - bigD * bigD));
+        double y2 = (-bigD * dx - Math.abs(dy) * Math.sqrt(radius * radius - bigD * bigD));
+        Point2D[] points = new Point2D[2];
+        points[0] = new Point2D(x1, y1);
+        points[1] = new Point2D(x2, y2);
+        return points;
     }
 
     private double sgn(final double x) {

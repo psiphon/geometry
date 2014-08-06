@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
  * @author sportdataconnect
  */
 public final class Point2D {
+
+    public static final Point2D X_AXIS_DIR = new Point2D(1.0, 0.0);
+    public static final Point2D Y_AXIS_DIR = new Point2D(0.0, 1.0);
     
     private static final Logger LOG = LogManager.getLogger(Point2D.class);
     
@@ -213,5 +216,22 @@ public final class Point2D {
         }
         //LOG.debug("<<findNextPoint");
         return closest;
+    }
+
+    public Point2D findNearest(final Point2D[] points) {
+        Point2D result = null;
+        double nearestDistance = Double.MAX_VALUE;
+        for (Point2D candidate : points) {
+            double candidateDistance = distanceFrom(candidate);
+            if (candidateDistance < nearestDistance) {
+                result = candidate;
+                nearestDistance = candidateDistance;
+            }
+        }
+        if (result != null) {
+            return result;
+        } else {
+            throw new IllegalArgumentException("Cannot find the nearest point in an empty list");
+        }
     }
 }
