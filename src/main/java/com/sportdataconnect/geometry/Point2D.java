@@ -201,7 +201,7 @@ public final class Point2D {
             //LOG.debug("candiate angle = " + Math.toDegrees(candidate.subtract(currentPoint).polarAngle()));
             //LOG.debug("starting angle angle = " + Math.toDegrees(startingAngle));
             double nextAngle = candidate.subtract(currentPoint).polarAngle() - startingAngle;
-            if (nextAngle > 0.0) {
+            if (nextAngle >= 0.0 && candidate != currentPoint) {
                 if (closest == null) {
                     closest = candidate;
                     closestAngle = nextAngle;

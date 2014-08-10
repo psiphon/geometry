@@ -2,7 +2,6 @@ package com.sportdataconnect.geometry;
 
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -70,7 +69,7 @@ public class Circle2DTest {
         Point2D p1 = new Point2D(DIM, DIM);
         Point2D p2 = new Point2D(2.0 - DIM, 2.0 - DIM);
         assertEquals(2, intersections.size());
-        assertTrue(GeometryTestUtil.setContainsSimilarPoint(p1, intersections));
-        assertTrue(GeometryTestUtil.setContainsSimilarPoint(p2, intersections));
+        assertTrue(GeometryTestUtil.collectionContainsSimilarPoints(p1, intersections));
+        assertTrue(GeometryTestUtil.collectionContainsSimilarPoints(p2, intersections));
     }
 }

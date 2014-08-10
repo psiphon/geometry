@@ -1,5 +1,6 @@
 package com.sportdataconnect.geometry;
 
+import java.util.Collection;
 import java.util.Set;
 
 public class GeometryTestUtil {
@@ -10,7 +11,7 @@ public class GeometryTestUtil {
         return Math.abs(p1.getX() - p2.getX()) < PRECISION && Math.abs(p1.getY() - p2.getY()) < PRECISION;
     }
 
-    public static boolean setContainsSimilarPoint(Point2D pt, Set<Point2D> points) {
+    public static boolean collectionContainsSimilarPoints(Point2D pt, Collection<Point2D> points) {
         for (Point2D candidatePoint : points) {
             if (pointsSimilar(pt, candidatePoint)) {
                 return true;

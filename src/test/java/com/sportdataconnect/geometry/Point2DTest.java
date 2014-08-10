@@ -1,7 +1,8 @@
 package com.sportdataconnect.geometry;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -57,11 +58,6 @@ public class Point2DTest {
     public void testNegativeYAxisPolarAngle() {
         Point2D pt = new Point2D(0.0, -1.0);
         assertEquals(Math.PI * 1.5, pt.polarAngle(), 0.00001);
-    }
-
-    @Test
-    public void testCreateConvexPolygon() {
-
     }
     
 }
