@@ -59,6 +59,12 @@ public final class Circle2D {
         }
     }
 
+    /**
+     * Returns the all the point that the specified line intersects the circle. This could be 0, 1 or 2 points. No
+     * guarantee is made regarding the order of the returned points
+     * @param line
+     * @return Returns the all the point that the specified line intersects the circle
+     */
     public Set<Point2D> getLineIntersectionPoints(final Line2D line) {
         /* Line circle intersection calculation assumes that the circle is centred at the origin so translate the line
            first */

@@ -3,6 +3,8 @@ package com.sportdataconnect.geometry;
 import java.awt.Dimension;
 
 /**
+ * Representation of the extent of a rectangle in 2D space. The bounds are represented as a width and height (i.e. the
+ * extent in the X and Y dimensions respectively).
  *
  * @author sportdataconnect
  */
@@ -11,21 +13,38 @@ public final class Extent2D {
     private double width;
     private double height;
 
+    /**
+     * Constructs a new Extent2D
+     * @param width
+     * @param height
+     */
     public Extent2D(final double width, final double height) {
         this.width = width;
         this.height = height;
     }
 
+    /**
+     * Returns the extent of the rectangle in the Y dimension
+     * @return Returns the extent of the rectangle in the Y dimension
+     */
     public double getHeight() {
         return height;
     }
 
+    /**
+     * Returns the extent of the rectangle in the X dimension
+     * @return Returns the extent of the rectangle in the X dimension
+     */
     public double getWidth() {
         return width;
     }
-    
+
+    /**
+     * Returns the ratio of the width to the height of the rectangle
+     * @return Returns the ratio of the width to the height of the rectangle
+     */
     public double getAspectRatio() {
-        return getWidth() / getHeight();
+        return width / height;
     }
 
     @Override

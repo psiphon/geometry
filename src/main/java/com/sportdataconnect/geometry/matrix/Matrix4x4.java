@@ -13,7 +13,7 @@ public final class Matrix4x4 {
 
     public Matrix4x4(final double[] m) {
         if (m.length != 16) {
-            throw new IllegalArgumentException("A 3x3 matrix must have 9 values");
+            throw new IllegalArgumentException("A 4x4 matrix must have 16 values");
         }
         this.values = m;
     }

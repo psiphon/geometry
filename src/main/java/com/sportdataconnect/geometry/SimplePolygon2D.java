@@ -15,7 +15,7 @@ public final class SimplePolygon2D implements Polygon2D {
 
     public SimplePolygon2D(final List<Point2D> points) {
         if (points.size() < 3) {
-            throw new IllegalArgumentException("Cannot create polygon with less than 3 vertices");
+            throw new InvalidGeometryException("Cannot create polygon with less than 3 vertices");
         }
         this.points = ImmutableList.copyOf(points);
     }

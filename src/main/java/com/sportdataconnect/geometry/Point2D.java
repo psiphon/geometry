@@ -146,14 +146,18 @@ public final class Point2D {
         }
         return new Point2D(sumX / pts.size(), sumY / pts.size());
     }
-    
+
     /**
+     *
      * Returns the smallest possible convex polygon that contains all of the supplied points.
      * The points are returned anti-clockwise.
      * @param points
      * @return Returns the smallest possible convex polygon that contains all of the supplied points
+     * @param points
+     * @return
+     * @throws InvalidGeometryException If the supplied collection of points is empty
      */
-    public static List<Point2D> createConvexPolygon(final Collection<Point2D> points) {
+    public static List<Point2D> createConvexPolygon(final Collection<Point2D> points) throws InvalidGeometryException {
         LOG.debug(">>");
         Set<Point2D> remainingPoints = new HashSet<Point2D>(points);
         Point2D previousPoint = findBottomPoint(remainingPoints);
@@ -177,7 +181,7 @@ public final class Point2D {
     
     private static Point2D findBottomPoint(final Collection<Point2D> points) {
         if (points.size() < 0) {
-            throw new IllegalArgumentException("Cannot find left most point from an empty set");
+            throw new InvalidGeometryException("Cannot find left most point from an empty set");
         }
         Iterator<Point2D> iter = points.iterator();
         Point2D lowest = iter.next();
@@ -218,7 +222,13 @@ public final class Point2D {
         return closest;
     }
 
-    public Point2D findNearest(final Point2D[] points) {
+    /**
+     * Returns the point in the supplied collection that is nearest to this point
+     * @param points
+     * @return Returns the point in the supplied collection that is nearest to this point
+     * @throws InvalidGeometryException If the supplied set of points is empty
+     */
+    public Point2D findNearest(final Point2D[] points) throws InvalidGeometryException {
         Point2D result = null;
         double nearestDistance = Double.MAX_VALUE;
         for (Point2D candidate : points) {
@@ -231,7 +241,7 @@ public final class Point2D {
         if (result != null) {
             return result;
         } else {
-            throw new IllegalArgumentException("Cannot find the nearest point in an empty list");
+            throw new InvalidGeometryException("Cannot find the nearest point in an empty list");
         }
     }
 }
