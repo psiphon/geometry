@@ -8,7 +8,12 @@ import java.util.List;
 /**
  * Represents a star polygon according to http://en.wikipedia.org/wiki/Star-shaped_polygon.
  * 
- * A star shaped polygon is useful as it can be broken down into triangles very simply.
+ * A star shaped polygon is useful as concave polygons can be broken down to triangles without complex calculations.
+ * The triangle calculation assumes the triangles formed by each neighbouring point pair and the kernal are non
+ * intersecting.
+ *
+ * Star2D performs no checks that the supplies set of points actually form a star - if invalid points are supplies the
+ * set of returned triangles will not be correct.
  *
  * @author sportdataconnect
  */
@@ -16,12 +21,22 @@ public final class Star2D implements Polygon2D {
     
     private ImmutableList<Point2D> points;
     private Point2D kernel;
-    
+
+    /**
+     * Instantiates a new star with the given points, assuming a kernel at the origin.
+     *
+     * @param points
+     */
     public Star2D(final List<Point2D> points) {
         this.points = ImmutableList.copyOf(points);
         kernel = new Point2D(0.0, 0.0);
     }
 
+    /**
+     * Instantiates a new star with the given points and kernel
+     * @param points
+     * @param kernel
+     */
     public Star2D(final List<Point2D> points, final Point2D kernel) {
         this.points = ImmutableList.copyOf(points);
         this.kernel = kernel;

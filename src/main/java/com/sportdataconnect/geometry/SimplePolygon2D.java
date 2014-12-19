@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * A polygon defined by a list of points. Triangles are calculated by creating a fan with the first point as the common
+ * point.
  *
  * @author sportdataconnect
  */
@@ -53,6 +55,11 @@ public final class SimplePolygon2D implements Polygon2D {
         return new Bounds2D(minX, maxX, minY, maxY);
     }
 
+    /**
+     * Returns a polygon that has the same shape but is centred on the origin (the centre being the centre of it's
+     * bounds)
+     * @return
+     */
     public SimplePolygon2D centreOnOrigin() {
         Point2D translation = getBounds().getCentre().scale(-1.0);
         List<Point2D> resultPoints = new ArrayList<Point2D>(points.size());
