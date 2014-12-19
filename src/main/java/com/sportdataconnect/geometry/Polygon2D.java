@@ -3,17 +3,16 @@ package com.sportdataconnect.geometry;
 import java.util.List;
 
 /**
- * An interface to allow operations on polygons that aren't aware of the exact representation of polygon in use.
- * Provides access to the underlying points as an indexed list and the polygon broken down into a set of tesselated
- * triangles. By permitting multiple representations of polygons to be implemented, operations such as polygon
- * tesselation can be optimized.
+ * This interface defines what operations must be provided by a polygon. Underlying points may be accessed as an indexed
+ * list and the polygon may be broken down into a set of tesselated triangles. Permitting different representations of
+ * polygons allows tessellation to be optimized.
  *
  * @author sportdataconnect
  */
 public interface Polygon2D {
 
     /**
-     * Returns point in the polygone with the specified (zero based) index
+     * Returns point in the polygon with the specified (zero based) index
      * @param ix
      * @return
      */

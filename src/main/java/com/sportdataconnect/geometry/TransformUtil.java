@@ -3,6 +3,7 @@ package com.sportdataconnect.geometry;
 /**
  *
  * @author sportdataconnect
+ * @deprecated these utilities are now available in Matrix4x4
  */
 public final class TransformUtil {
 
