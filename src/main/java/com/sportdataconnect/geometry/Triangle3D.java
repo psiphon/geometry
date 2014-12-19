@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import com.sportdataconnect.geometry.matrix.Matrix3x3;
 
 /**
+ * Representation of a 3D triangle
  *
  * @author sportdataconnect
  */
@@ -19,19 +20,6 @@ public final class Triangle3D {
         this.pt3 = pt3;
     }
 
-//    public Point2D get(int ix) {
-//        switch (ix) {
-//            case 0: return pt1;
-//            case 1: return pt2;
-//            case 2: return pt3;
-//            default: throw new IndexOutOfBoundsException("Expected point index of 0..2 but encountered " + ix);
-//        }
-//    }
-//
-//    public int numPoints() {
-//        return 3;
-//    }
-
     public Point3D getPt1() {
         return pt1;
     }
@@ -43,7 +31,13 @@ public final class Triangle3D {
     public Point3D getPt3() {
         return pt3;
     }
-    
+
+    /**
+     * Returns the point that the line passing through the supplied edge intersects the plane containing this triangle
+     * (ie as this is a plane line intersection the result may not be on either the original edge or the original triangle)
+     * @param edge
+     * @return
+     */
     public Optional<Point3D> planeEdgeIntersection(final Edge3D edge) {
         double[] m = new double[9];
         m[0] = edge.getStartPoint().getX() - edge.getEndPoint().getX();

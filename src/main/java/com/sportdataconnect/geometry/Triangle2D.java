@@ -6,12 +6,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * Representation of a 2D triangle that also implements Polygon2D
  *
  * @author sportdataconnect
  */
 public final class Triangle2D implements Polygon2D {
-    
-    private static final Logger LOG = LogManager.getLogger(Triangle2D.class);
     
     private Point2D pt1;
     private Point2D pt2;
@@ -56,7 +55,13 @@ public final class Triangle2D implements Polygon2D {
         }
         return thisAsList;
     }
-    
+
+    /**
+     * Returns whether or not the point is contained withing the triangle
+     *
+     * @param pt
+     * @return Returns whether or not the point is contained withing the triangle
+     */
     public boolean contains(final Point2D pt) {
         Point2D ab = pt2.subtract(pt1);
         Point2D bc = pt3.subtract(pt2);
